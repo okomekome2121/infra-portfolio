@@ -8,4 +8,3 @@ output "public_subnet_ids" {
     aws_subnet.public2.id
   ]
 }
-
