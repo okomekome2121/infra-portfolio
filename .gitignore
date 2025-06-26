@@ -1,3 +1,5 @@
 ./environments/dev/.terraform/
 .DS_Store
 README.md
+.git/
+.terraform/
