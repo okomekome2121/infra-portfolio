@@ -1,5 +1,19 @@
-./environments/dev/.terraform/
-./.git/
+# Terraform 作業ディレクトリ
+**/.terraform/
+
+# Terraform 状態ファイル
+*.tfstate
+*.tfstate.backup
+crash.log
+
+# Terraform プランファイル
+*.tfplan
+
+# macOS 隠しファイル
 .DS_Store
-README.md
+
+# エディタ・IDE
+*.swp
+.idea/
+.vscode/
 
