@@ -18,10 +18,8 @@ terraform {
 
 module "vpc" {
   source     = "../../modules/vpc"
-  cidr_block = "10.0.0.0/16"
-  name       = "my-vpc"
-  #vpc_id     = module.vpc.vpc_id
-  #gateway_id = module.vpc.gateway_id
+  cidr_block = var.cidr_block
+  name       = var.name
 }
 
 # ALB Module
@@ -40,6 +38,7 @@ module "alb" {
 module "security_groups" {
   source      = "../../modules/security_groups"
   vpc_id      = module.vpc.vpc_id
-  name_prefix = "dev"
+  #vpc_id      = var.vpc_id
+  name_prefix = var.name_prefix
 }
 
