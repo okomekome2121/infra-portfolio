@@ -2,11 +2,6 @@ variable "region" {
   default = "ap-northeast-1"
 }
 
-# variable "vpc_id" {
-#   type        = string
-#   description = "VPCのvpc_id"
-# }
-
 variable "cidr_block" {
   type        = string
   description = "VPCのCIDRブロック"

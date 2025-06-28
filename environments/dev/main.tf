@@ -26,7 +26,7 @@ module "vpc" {
 module "alb" {
   source = "../../modules/alb"
 
-  name               = "okome-portfolio-dev-alb"
+  alb_name               = module.alb.alb_name
   internal           = false
   security_groups = [module.security_groups.alb_sg_id]
   subnets        = module.vpc.public_subnet_ids

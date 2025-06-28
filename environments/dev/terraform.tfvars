@@ -1,6 +1,5 @@
 
 
-vpc_id = module.vpc.vpc_id
 cidr_block = "10.0.0.0/16"
 name       = "my-vpc"
 name_prefix = "my-vpc"

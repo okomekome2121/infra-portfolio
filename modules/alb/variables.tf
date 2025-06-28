@@ -1,4 +1,4 @@
-variable "name" {}
+variable "alb_name" {}
 variable "internal" {
   default = false
 }

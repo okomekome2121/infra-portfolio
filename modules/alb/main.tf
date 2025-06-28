@@ -1,5 +1,5 @@
 resource "aws_lb" "main" {
-  name               = var.name
+  name               = var.alb_name
   internal           = var.internal
   load_balancer_type = "application"
   security_groups    = var.security_groups

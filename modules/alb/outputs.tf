@@ -1,3 +1,8 @@
+output "alb_name" {
+  description = "ALBのNAME"
+  value       = aws_lb.main.arn
+}
+
 output "alb_arn" {
   description = "ALBのARN"
   value       = aws_lb.main.arn
