@@ -1,20 +1,3 @@
-provider "aws" {
-  region = "ap-northeast-1"
-}
-
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-  backend "s3" {
-    bucket = "okome-terraform-state-bucket"
-    key    = "env:/terraform.tfstate"
-    region = "ap-northeast-1"
-  }
-}
 
 module "vpc" {
   source     = "../../modules/vpc"
