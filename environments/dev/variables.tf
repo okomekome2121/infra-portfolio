@@ -6,7 +6,7 @@ variable "cidr_block" {
   type        = string
 }
 
-variable "name" {
+variable "vpc_name" {
   type        = string
   description = "VPCの名前"
 }
