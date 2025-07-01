@@ -4,7 +4,7 @@ variable "vpc_id" {
   default     = null 
 }
 
-variable "cvpc_cidr_block" {
+variable "cidr_block" {
   description = "The CIDR block for the VPC or subnet."
   type        = string
 }
@@ -36,6 +36,7 @@ variable "gateway_id" {
 variable "name" {
   description = "Base name to apply to resources, such as Name tags."
   type        = string
+  default     = null
 }
 
 variable "name_prefix" {

@@ -22,19 +22,13 @@ variable "security_group_ids" {
 variable "enable_deletion_protection" {
   description = "Enables deletion protection for the ALB (prevents accidental deletion)."
   type        = bool
-  default     = false
 }
 
-variable "tags" {
-  description = "Common tags to apply to all ALB-related resources."
-  type        = map(string)
-}
+# variable "tags" {
+#   description = "Common tags to apply to all ALB-related resources."
+#   type        = map(string)
+# }
 
-variable "vpc_id" {
-  description = "The ID of the VPC used to create the target group."
-  type        = string
-  default     = null
-}
 
 variable "target_group_name" {
   description = "The name of the target group."
