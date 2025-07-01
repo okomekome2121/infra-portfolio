@@ -1,4 +1,4 @@
-variable "alb_name" {
+variable "name" {
   description = "The name of the ALB (used for Name tags and identification)."
   type        = string
 }

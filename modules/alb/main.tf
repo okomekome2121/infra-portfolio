@@ -1,4 +1,4 @@
-resource "aws_lb" "this" {
+resource "aws_lb" "test" {
   name               = var.name
   internal           = var.internal
   load_balancer_type = "application"
@@ -9,11 +9,11 @@ resource "aws_lb" "this" {
   tags = var.tags
 }
 
-resource "aws_lb_target_group" "this" {
+resource "aws_lb_target_group" "test" {
   name        = var.target_group_name
   port        = var.target_group_port
   protocol    = var.target_group_protocol
-  vpc_id      = var.vpc_id
+  vpc_id      = module.vpc_id
   target_type = "ip"
 
   health_check {

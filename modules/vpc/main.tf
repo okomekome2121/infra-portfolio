@@ -1,4 +1,4 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "test" {
   cidr_block           = var.cvpc_cidr_block
   
   tags = {
@@ -6,7 +6,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-resource "aws_internet_gateway" "main" {
+resource "aws_internet_gateway" "test" {
   vpc_id = aws_vpc.main.id
 
   tags = {
@@ -55,28 +55,3 @@ resource "aws_route_table_association" "public1" {
   route_table_id = aws_route_table.public.id
 }
 
-
-# # ALB Security Group
-# resource "aws_security_group" "alb_sg" {
-#   name        = "alb-sg"
-#   description = "Allow HTTP traffic"
-#   vpc_id      = aws_vpc.main.id
-
-#   ingress {
-#     from_port   = 80
-#     to_port     = 80
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-
-#   tags = {
-#     Name = "alb-sg"
-#   }
-# }
