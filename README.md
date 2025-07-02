@@ -15,11 +15,11 @@ infra-aws-portfolio/
 │   ├── ec2/
 │   ├── ecs/
 │   ├── alb/
-│   ├── lambda/
 │   ├── cloudwatch/
-│   ├── eventbridge/
-│   ├── sns/
 │   └── s3/
+├── cloudformation/
+│   ├── monitoring-stack.yaml  ← SNS + CloudWatch Alarms + Lambda + EventBridge
+│   └── README.md              ← スタック使い方メモ
 ├── environments/
 │   ├── dev/
 │   │   ├── main.tf
