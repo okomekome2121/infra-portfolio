@@ -1,25 +1,25 @@
-resource "aws_vpc" "test" {
+resource "aws_vpc" "vpc" {
   cidr_block           = var.cidr_block
-  name               = var.name
 
-  # tags = {
-  #   Name = "${var.name_prefix}-vpc"
-  # }
+  tags = {
+    Name = "${var.name_prefix}-vpc"
+  }
 }
 
-resource "aws_internet_gateway" "test" {
-  vpc_id = aws_vpc.test.id
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
 
   tags = {
     Name = "${var.name_prefix}-igw"
   }
 }
 
-resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.test.id
+resource "aws_route_table" "route" {
+  vpc_id = aws_vpc.vpc.id
 
   route {
-    gateway_id = aws_internet_gateway.test.id
+    gateway_id = aws_internet_gateway.igw.id
+    cidr_block = "0.0.0.0/0"
   }
 
   tags = {
@@ -28,9 +28,9 @@ resource "aws_route_table" "public" {
 }
 
 # Public Subnet 1
-resource "aws_subnet" "public1" {
-  vpc_id                  = aws_vpc.test.id
-  cidr_block              = var.public_subnet_cidrs[count.index]
+resource "aws_subnet" "public" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.public_subnet_cidrs
   availability_zone       = var.availability_zones
   map_public_ip_on_launch = true
 
@@ -40,9 +40,9 @@ resource "aws_subnet" "public1" {
 }
 
 # Public Subnet 2
-resource "aws_subnet" "public2" {
-  vpc_id                  = aws_vpc.test.id
-  cidr_block              = var.private_subnet_cidrs[count.index]
+resource "aws_subnet" "private" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.private_subnet_cidrs
   availability_zone       = var.availability_zones
   map_public_ip_on_launch = true
 
@@ -52,7 +52,7 @@ resource "aws_subnet" "public2" {
 }
 
 resource "aws_route_table_association" "public1" {
-  subnet_id      = aws_subnet.public1.id
-  route_table_id = aws_route_table.public.id
+  subnet_id      = aws_subnet.public.id
+  route_table_id = aws_route_table.route.id
 }
 

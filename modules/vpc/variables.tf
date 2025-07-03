@@ -11,14 +11,14 @@ variable "cidr_block" {
 
 variable "public_subnet_cidrs" {
   description = "CIDR block for the public subnet"
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = "10.0.1.0/24"
 }
 
 variable "private_subnet_cidrs" {
   description = "List of CIDR blocks for private subnets."
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = "10.0.2.0/24"
 }
 
 variable "availability_zones" {
@@ -33,11 +33,11 @@ variable "gateway_id" {
   default     = null
 }
 
-variable "name" {
-  description = "Base name to apply to resources, such as Name tags."
-  type        = string
-  default     = null
-}
+# variable "name" {
+#   description = "Base name to apply to resources, such as Name tags."
+#   type        = string
+#   default     = null
+# }
 
 variable "name_prefix" {
   description = "Prefix added to resource names (e.g., 'dev-', 'prod-')."

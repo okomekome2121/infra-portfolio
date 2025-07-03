@@ -1,28 +1,21 @@
-variable "name_prefix" {
-  description = "Prefix added to resource names (e.g., 'dev-', 'prod-')."
+variable "name" {
+  description = "Prefix name for resources"
   type        = string
-  default     = "dev"
 }
 
-variable "ingress_rules" {
-  description = "List of ingress rules for the security group."
-  type        = list(object({
-    from_port   = number
-    to_port     = number
-    protocol    = string
-    cidr_blocks = list(string)
-  }))
-  default     = []
+variable "vpc_id" {
+  description = "VPC ID where SG is created"
+  type        = string
 }
 
-variable "egress_rules" {
-  description = "List of egress rules for the security group."
-  type        = list(object({
-    from_port   = number
-    to_port     = number
-    protocol    = string
-    cidr_blocks = list(string)
-  }))
-  default     = []
+variable "ingress_cidr_blocks" {
+  description = "Allowed CIDR blocks for ALB ingress"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "environment" {
+  description = "Environment (e.g. dev, prod)"
+  type        = string
 }
 

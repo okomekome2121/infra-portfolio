@@ -1,30 +1,24 @@
 resource "aws_security_group" "alb_sg" {
-  name        = "${var.name_prefix}-alb-sg"
+  name        = "${var.name}-alb-sg"
   description = "Security group for ALB"
-  vpc_id      = module.vpc.vpc_id
+  #vpc_id      = module.vpc.vpc_id
 
-  dynamic "ingress" {
-    for_each = var.ingress_rules
-    content {
-      from_port   = each.value.from_port
-      to_port     = each.value.to_port
-      protocol    = each.value.protocol
-      cidr_blocks = each.value.cidr_blocks
-    }
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.ingress_cidr_blocks
   }
 
-  dynamic "egress" {
-    for_each = var.egress_rules
-    content {
-      from_port   = each.value.from_port
-      to_port     = each.value.to_port
-      protocol    = each.value.protocol
-      cidr_blocks = each.value.cidr_blocks
-    }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name        = "${var.name_prefix}-alb-sg"
-    ManagedBy   = "Terraform"
+    Name        = "${var.name}-alb-sg"
+    Environment = var.environment
   }
 }

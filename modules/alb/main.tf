@@ -1,34 +1,49 @@
-resource "aws_lb" "test" {
+resource "aws_lb" "dev_test" {
   name               = var.name
   internal           = var.internal
   load_balancer_type = "application"
-  subnets            = var.subnet_ids
   security_groups    = var.security_group_ids
+  subnets            = var.subnet_ids
+
   enable_deletion_protection = var.enable_deletion_protection
 
-  tags = var.tags
+  tags = {
+    Name        = var.name
+    Environment = var.environment
+  }
 }
 
-resource "aws_lb_target_group" "test" {
-  name        = var.target_group_name
-  port        = var.target_group_port
-  protocol    = var.target_group_protocol
-  vpc_id      = module.vpc.vpc_id
-  target_type = "ip"
+resource "aws_lb_target_group" "dev_test" {
+  name        = "${var.name}-tg"
+  port        = var.target_port
+  protocol    = var.target_protocol
+#   vpc_id      = module.vpc.vpc_id
+  target_type = var.target_type
 
   health_check {
-    protocol = var.health_check_protocol
-    path     = var.health_check_path
+    path                = var.health_check_path
+    protocol            = var.health_check_protocol
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 5
+    interval            = 30
+    matcher             = "200"
+  }
+
+  tags = {
+    Name        = "${var.name}-tg"
+    Environment = var.environment
   }
 }
 
 resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.this.arn
+  load_balancer_arn = aws_lb.dev_test.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.this.arn
+    target_group_arn = aws_lb_target_group.dev_test.arn
   }
 }
+

@@ -1,56 +1,72 @@
 variable "name" {
-  description = "The name of the ALB (used for Name tags and identification)."
+  description = "Name of the ALB"
   type        = string
 }
 
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string
+}
+
+variable "subnet_ids" {
+  description = "List of subnet IDs"
+  type        = list(string)
+  default     = null
+}
+
+variable "security_group_ids" {
+  description = "List of security group IDs"
+  type        = list(string)
+}
+
 variable "internal" {
-  description = "Whether the ALB is internal (true = private/internal ALB)."
+  description = "Whether the load balancer is internal"
   type        = bool
   default     = false
 }
 
-variable "subnet_ids" {
-  description = "List of subnet IDs where the ALB will be deployed."
-  type        = list(string)
-}
-
-variable "security_group_ids" {
-  description = "List of security group IDs to attach to the ALB."
-  type        = list(string)
-}
-
 variable "enable_deletion_protection" {
-  description = "Enables deletion protection for the ALB (prevents accidental deletion)."
+  description = "Whether to enable deletion protection"
   type        = bool
+  default     = false
 }
 
-# variable "tags" {
-#   description = "Common tags to apply to all ALB-related resources."
-#   type        = map(string)
-# }
-
-
-variable "target_group_name" {
-  description = "The name of the target group."
-  type        = string
-}
-
-variable "target_group_port" {
-  description = "The port number to use for the target group (e.g., 80)."
+variable "target_port" {
+  description = "Port for target group"
   type        = number
+  default     = 80
 }
 
-variable "target_group_protocol" {
-  description = "The protocol to use for the target group (e.g., HTTP or HTTPS)."
+variable "target_protocol" {
+  description = "Protocol for target group"
   type        = string
+  default     = "HTTP"
 }
 
-variable "health_check_protocol" {
-  description = "The protocol to use for health checks (e.g., HTTP)."
+variable "target_type" {
+  description = "Target type (instance, ip, lambda)"
   type        = string
+  default     = "ip"
 }
 
 variable "health_check_path" {
-  description = "The path used for health checks (e.g., /health)."
+  description = "Health check path"
+  type        = string
+  default     = "/"
+}
+
+variable "health_check_protocol" {
+  description = "Health check protocol"
+  type        = string
+  default     = "HTTP"
+}
+
+variable "environment" {
+  description = "Environment tag (e.g. dev, prod)"
   type        = string
 }
+
+# variable "aws_lb_security_group_ids" {
+#   description = "List of security group IDs to attach to ALB"
+#   type        = list(string)
+# }
