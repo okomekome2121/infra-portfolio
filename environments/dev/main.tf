@@ -1,8 +1,7 @@
 module "vpc" {
   source              = "../../modules/vpc"
   cidr_block          = var.cidr_block
-  # public_subnet_cidrs = module.vpc.public_subnet_cidrs_id
-  # private_subnet_cidrs = module.vpc.private_subnet_cidrs_id
+  public_subnet_ids   = var.public_subnet_ids
 }
 
 module "s3" {
@@ -19,15 +18,18 @@ module "security_group" {
   environment         = "dev"
 }
 
-module "alb" {
-  source                      = "../../modules/alb"
-  name                        = "myapp-alb"
-  vpc_id                      = module.vpc.vpc_id
-  subnet_ids                  = module.vpc.public_subnet_cidrs_id
-  security_group_ids          = [module.security_group.alb_sg_id]
-  environment                 = "dev"
-  enable_deletion_protection = false
-}
+# module "alb" {
+#   source                      = "../../modules/alb"
+#   name                        = "myapp-alb"
+#   vpc_id                      = module.vpc.vpc_id
+#   subnet_ids = [
+#     module.vpc.public_subnet_id[0],
+#     module.vpc.public_subnet_id[1]
+#   ]
+#   security_group_ids          = [module.security_group.alb_sg_id]
+#   environment                 = "dev"
+#   enable_deletion_protection = false
+# }
 
 
 # module "security_group" {

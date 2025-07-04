@@ -9,22 +9,21 @@ variable "cidr_block" {
   type        = string
 }
 
-variable "public_subnet_cidrs" {
-  description = "CIDR block for the public subnet"
-  type        = string
-  default     = "10.0.1.0/24"
-}
-
-variable "private_subnet_cidrs" {
-  description = "List of CIDR blocks for private subnets."
-  type        = string
-  default     = "10.0.2.0/24"
-}
-
 variable "availability_zones" {
   description = "The availability zone for the subnet."
   type        = string
   default     = null
+}
+
+variable "public_subnet_cidrs" {
+  type        = list(string)
+  description = "List of CIDR blocks for public subnets"
+}
+
+variable "private_subnet_ids" {
+  type        = list(string)
+  description = "List of CIDR blocks for private subnets"
+  default     = []
 }
 
 variable "gateway_id" {

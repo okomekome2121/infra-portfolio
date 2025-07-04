@@ -49,6 +49,11 @@ variable "target_type" {
   default     = "ip"
 }
 
+variable "target_ips" {
+  description = "List of IP addresses to register to the target group"
+  type        = list(string)
+}
+
 variable "health_check_path" {
   description = "Health check path"
   type        = string

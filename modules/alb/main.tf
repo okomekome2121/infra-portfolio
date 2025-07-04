@@ -17,8 +17,8 @@ resource "aws_lb_target_group" "dev_test" {
   name        = "${var.name}-tg"
   port        = var.target_port
   protocol    = var.target_protocol
-#   vpc_id      = module.vpc.vpc_id
-  target_type = var.target_type
+  #vpc_id      = module.vpc.vpc_id
+  target_type = var.vpc_id
 
   health_check {
     path                = var.health_check_path
@@ -34,6 +34,13 @@ resource "aws_lb_target_group" "dev_test" {
     Name        = "${var.name}-tg"
     Environment = var.environment
   }
+}
+
+resource "aws_lb_target_group_attachment" "ip_targets" {
+  for_each           = toset(var.target_ips)
+  target_group_arn   = aws_lb_target_group.dev_test.arn
+  target_id          = each.value  # IPアドレス
+  port               = var.target_port
 }
 
 resource "aws_lb_listener" "http" {

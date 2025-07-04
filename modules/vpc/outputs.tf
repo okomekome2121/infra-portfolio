@@ -23,14 +23,18 @@ output "route_table_id" {
   
 }
 
-output "public_subnet_cidrs_id" {
-  description = "List of public subnet IDs"
-  value       = aws_subnet.public.cidr_block
+output "public_subnet_id" {
+  value = [
+    aws_subnet.public1.id,
+    aws_subnet.public2.id
+  ]
 }
 
-output "private_subnet_cidrs_id" {
-  description = "List of private subnet IDs"
-  value       = aws_subnet.private.cidr_block
+output private_subnet_id {
+  value = [
+    aws_subnet.private1.id,
+    aws_subnet.private2.id
+  ]
 }
 
 output "route_table_association_id" {
