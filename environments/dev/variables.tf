@@ -5,8 +5,6 @@ variable "region" {
 variable "availability_zones" {
   description = "List of availability zones"
   type        = list(string)
-  default     = ["ap-northeast-1a", "ap-northeast-1b", "ap-northeast-1c"]
-  
 }
 
 variable "cidr_block" {
@@ -17,11 +15,32 @@ variable "cidr_block" {
 variable "public_subnet_cidrs" {
   description = "CIDR block for the public subnet"
   type        = list(string)
-  default     = []
 }
 
-variable "plivate_subnet_ids" {
+variable "private_subnet_cidrs" {
   description = "List of CIDR blocks for private subnets."
   type        = list(string)
-  default     = []
 }
+
+variable "ami_id" {
+  description = "AMI ID to use for the EC2 instance"
+  type        = string
+} 
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "key_name" {
+  description = "SSH key name"
+  type        = string
+}
+
+variable "environment" {
+  description = "The environment for which the resources are being created (e.g., dev, prod)"
+  type        = string
+  default     = "dev"
+}
+

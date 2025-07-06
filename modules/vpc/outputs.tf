@@ -23,19 +23,19 @@ output "route_table_id" {
   
 }
 
-output "public_subnet_id" {
+output "public_subnet_ids" {
   value = [
     aws_subnet.public1.id,
     aws_subnet.public2.id
   ]
 }
 
-output private_subnet_id {
-  value = [
-    aws_subnet.private1.id,
-    aws_subnet.private2.id
-  ]
-}
+# output private_subnet_id {
+#   value = [
+#     aws_subnet.private1.id,
+#     aws_subnet.private2.id
+#   ]
+# }
 
 output "route_table_association_id" {
   description = "List of public subnet IDs"

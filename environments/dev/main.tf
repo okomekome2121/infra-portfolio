@@ -1,7 +1,8 @@
 module "vpc" {
   source              = "../../modules/vpc"
   cidr_block          = var.cidr_block
-  public_subnet_ids   = var.public_subnet_ids
+  public_subnet_cidrs = var.public_subnet_cidrs
+  private_subnet_cidrs  = var.private_subnet_cidrs
 }
 
 module "s3" {
@@ -15,6 +16,17 @@ module "security_group" {
   name                = "myapp"
   vpc_id              = module.vpc.vpc_id
   ingress_cidr_blocks = ["0.0.0.0/0"]
+  environment         = "dev"
+}
+
+module "ec2" {
+  source              = "../../modules/ec2"
+  ami_id              = var.ami_id
+  instance_type       = var.instance_type
+  key_name            = var.key_name
+  #vpc_id              = module.vpc.vpc_id
+  subnet_id           = module.vpc.public_subnet_ids
+  #security_group_ids  = [module.security_group.sg_id]
   environment         = "dev"
 }
 

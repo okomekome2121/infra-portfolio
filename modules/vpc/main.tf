@@ -30,7 +30,7 @@ resource "aws_route_table" "route" {
 # Public Subnet 1
 resource "aws_subnet" "public1" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.public_subnet_ids[0]
+  cidr_block              = var.public_subnet_cidrs[0]
   availability_zone       = var.availability_zones
   map_public_ip_on_launch = true
 
@@ -41,7 +41,7 @@ resource "aws_subnet" "public1" {
 
 resource "aws_subnet" "public2" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.public_subnet_ids[1]
+  cidr_block              = var.public_subnet_cidrs[1]
   availability_zone       = var.availability_zones
   map_public_ip_on_launch = true
 
@@ -53,7 +53,7 @@ resource "aws_subnet" "public2" {
 # Public Subnet 2
 resource "aws_subnet" "private1" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.plivate_subnet_ids[0]
+  cidr_block              = var.private_subnet_cidrs[0]
   availability_zone       = var.availability_zones
   map_public_ip_on_launch = true
 
@@ -64,7 +64,7 @@ resource "aws_subnet" "private1" {
 
 resource "aws_subnet" "private2" {
   vpc_id                  = aws_vpc.vpc.id
-  cidr_block              = var.plivate_subnet_ids[1]
+  cidr_block              = var.private_subnet_cidrs[1]
   availability_zone       = var.availability_zones
   map_public_ip_on_launch = true
 

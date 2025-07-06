@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "dev_test" {
 resource "aws_lb_target_group_attachment" "ip_targets" {
   for_each           = toset(var.target_ips)
   target_group_arn   = aws_lb_target_group.dev_test.arn
-  target_id          = each.value  # IPアドレス
+  target_id          = each .value  # IPアドレス
   port               = var.target_port
 }
 
