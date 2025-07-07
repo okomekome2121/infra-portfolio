@@ -30,6 +30,16 @@ module "ec2" {
   environment         = "dev"
 }
 
+module "ecs" {
+  source              = "../../modules/ecs"
+  execution_role_arn = var.execution_role_arn
+  task_role_arn      = var.task_role_arn
+  container_image    = var.container_image
+  subnet_ids         = module.vpc.public_subnet_ids
+  #security_group_ids = [module.security_group.sg_id]
+  environment        = "dev"
+}
+
 # module "alb" {
 #   source                      = "../../modules/alb"
 #   name                        = "myapp-alb"

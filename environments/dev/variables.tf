@@ -44,3 +44,18 @@ variable "environment" {
   default     = "dev"
 }
 
+variable "execution_role_arn" {
+  description = "ARN of the ECS task execution role"
+  type        = string
+}
+
+variable "task_role_arn" {
+  description = "ARN of the ECS task role"
+  type        = string
+}
+
+variable "container_image" {
+  description = "Docker image to use for the ECS container"
+  type        = string
+}
+

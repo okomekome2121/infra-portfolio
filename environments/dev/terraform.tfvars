@@ -14,5 +14,5 @@ key_name      = "test_okome_ec2"
 execution_role_arn = "arn:aws:iam::123456789012:role/ecsExecutionRole"
 task_role_arn      = "arn:aws:iam::123456789012:role/ecsTaskRole"
 container_image    = "nginx:latest"
-subnet_ids         = ["subnet-abc123", "subnet-def456"]
+#subnet_ids         = ["subnet-abc123", "subnet-def456"]
 #security_group_ids = ["sg-xxxxxx"]
